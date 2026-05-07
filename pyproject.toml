@@ -1,5 +1,5 @@
 [project]
-name = "release-governor"
+name = "llm-release-governor"
 version = "0.1.0"
 description = "Promotion gate for LLM deployments. Blocks unsafe CI to staging promotion."
 readme = "README.md"
@@ -36,6 +36,12 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build]
 directory = "dist"
+
+[tool.hatch.build.targets.wheel]
+packages = ["release_governor"]
+
+[tool.hatch.build.targets.sdist]
+include = ["release_governor/", "tests/", "examples/"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

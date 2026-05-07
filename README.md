@@ -7,7 +7,7 @@ Designed for staging/pre-prod environments with structured CI/CD workflows.
 ## Install
 
 ```bash
-pip install release-governor
+pip install llm-release-governor
 ```
 
 ## What it does
@@ -71,7 +71,7 @@ release-governor evaluate \
 ```yaml
 - name: Gate promotion
   run: |
-    pip install locc release-governor
+    pip install locc llm-release-governor
     locc run --contract contracts/current.json \
              --snapshot snapshots/current.json \
              --output json > locc_result.json
