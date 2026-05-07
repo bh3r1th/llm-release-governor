@@ -55,16 +55,29 @@ jobs:
       - name: Run Release Governor
         id: governor
         run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          COMMENT_FLAGS=""
+          if [ -n "$PR_NUMBER" ]; then
+            COMMENT_FLAGS="--comment --repo ${{ github.repository }} --pr-number $PR_NUMBER"
+          fi
+
+          OVERRIDE_FLAG=""
+          if [ -f "overrides/${{ env.TARGET_ENV }}/active.json" ]; then
+            OVERRIDE_FLAG="--override-file overrides/${{ env.TARGET_ENV }}/active.json"
+          fi
+
+          PFA_FLAG=""
+          if [ -f "pfa_findings.json" ]; then
+            PFA_FLAG="--pfa-findings pfa_findings.json"
+          fi
+
           release-governor evaluate \
             --locc-artifact locc_result.json \
             --env ${{ env.TARGET_ENV }} \
             --sha ${{ env.GITHUB_SHA }} \
-            --comment \
-            --repo ${{ github.repository }} \
-            --pr-number ${{ github.event.pull_request.number }} \
-            $([ -f pfa_findings.json ] && echo "--pfa-findings pfa_findings.json") \
-            $([ -f overrides/${{ env.TARGET_ENV }}/active.json ] \
-              && echo "--override-file overrides/${{ env.TARGET_ENV }}/active.json")
+            $COMMENT_FLAGS \
+            $OVERRIDE_FLAG \
+            $PFA_FLAG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
