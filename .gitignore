@@ -38,3 +38,5 @@ rg_audit.jsonl
 
 # Local assistant config
 .claude/
+
+build_tmp/

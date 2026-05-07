@@ -1,0 +1,10 @@
+{
+  "_comment": "Replace approved_head_sha and identity_hash with real values before committing.",
+  "approved_by": "alice",
+  "reason": "PII field confirmed non-sensitive in this context",
+  "scope": "staging",
+  "leakage_types": ["pii", "policy"],
+  "expires_at": "2027-05-06T00:00:00Z",
+  "approved_head_sha": "<your-commit-sha>",
+  "identity_hash": "<locc-artifact-hash>"
+}

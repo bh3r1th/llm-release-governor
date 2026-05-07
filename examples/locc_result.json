@@ -1,0 +1,21 @@
+{
+  "version": "1.1.0",
+  "status": "FAIL",
+  "checks": [
+    {
+      "name": "pii_policy_check",
+      "result": "FAIL",
+      "reasons": ["email address detected in output"],
+      "diffs": []
+    },
+    {
+      "name": "schema_check",
+      "result": "FAIL",
+      "reasons": ["required field missing"],
+      "diffs": [
+        {"field": "user_id", "change_type": "missing"},
+        {"field": "role", "change_type": "type_changed"}
+      ]
+    }
+  ]
+}

@@ -1,28 +1,41 @@
-[build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "release-governor"
 version = "0.1.0"
+description = "Promotion gate for LLM deployments. Blocks unsafe CI to staging promotion."
+readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.10"
-dependencies = [
-    "click",
-    "requests",
-    "pydantic>=2.0",
-    "PyYAML",
+keywords = ["llm", "deployment", "governance", "ci-cd", "staging", "contracts"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
+dependencies = ["click", "requests", "pydantic>=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/<org>/release-governor"
+Documentation = "https://github.com/<org>/release-governor#readme"
+Issues = "https://github.com/<org>/release-governor/issues"
 
 [project.scripts]
 release-governor = "release_governor.cli:cli"
-pfa = "prompt_failure_analyzer.cli:cli"
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest", "pytest-cov"]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["release_governor*", "prompt_failure_analyzer*"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+directory = "dist"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

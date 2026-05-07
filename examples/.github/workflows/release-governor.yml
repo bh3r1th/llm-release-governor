@@ -1,0 +1,40 @@
+name: Release Governor
+on: [push, pull_request]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install tools
+        run: pip install locc release-governor
+
+      - name: Run locc
+        run: |
+          locc run \
+            --contract contracts/current.json \
+            --snapshot snapshots/current.json \
+            --output json > locc_result.json
+        continue-on-error: true
+
+      - name: Gate promotion
+        run: |
+          release-governor evaluate \
+            --locc-artifact locc_result.json \
+            --env staging \
+            --sha ${{ github.sha }} \
+            --audit-log rg_audit.jsonl
+
+      - name: Upload decision
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governor-decision
+          path: |
+            governor_decision.json
+            rg_audit.jsonl

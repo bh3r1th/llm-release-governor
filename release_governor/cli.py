@@ -3,6 +3,7 @@ import sys
 
 import click
 
+from release_governor import __version__
 from release_governor.engine.decision import make_decision
 from release_governor.engine.leakage import primary_leakage_type
 from release_governor.engine.loader import (
@@ -28,6 +29,7 @@ _EXIT_CODES = {"ALLOW": 0, "BLOCK": 1, "REQUIRE_OVERRIDE": 2}
 
 
 @click.group()
+@click.version_option(version=__version__, prog_name="release-governor")
 def cli():
     pass
 
