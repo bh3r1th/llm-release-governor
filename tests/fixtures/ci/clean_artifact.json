@@ -1,0 +1,18 @@
+{
+  "version": "1.1.0",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "schema_validation",
+      "result": "PASS",
+      "reasons": [],
+      "diffs": []
+    },
+    {
+      "name": "constraint_check",
+      "result": "PASS",
+      "reasons": [],
+      "diffs": []
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "approved_by": "alice",
+  "reason": "confirmed false positive",
+  "scope": "staging",
+  "expires_at": "2027-05-06T00:00:00Z",
+  "approved_head_sha": "deadbeef",
+  "leakage_type": "pii",
+  "identity_hash": "abc123"
+}

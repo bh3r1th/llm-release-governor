@@ -1,0 +1,18 @@
+{
+  "version": "1.1.0",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "pii_policy",
+      "result": "PASS",
+      "reasons": [],
+      "diffs": []
+    },
+    {
+      "name": "schema_contract",
+      "result": "PASS",
+      "reasons": [],
+      "diffs": []
+    }
+  ]
+}

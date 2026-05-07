@@ -1,0 +1,12 @@
+{
+  "version": "1.1.0",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "pii_scan",
+      "result": "PASS",
+      "reasons": ["contains email address in output", "ssn pattern detected"],
+      "diffs": []
+    }
+  ]
+}

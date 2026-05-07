@@ -1,0 +1,3 @@
+Respond with a list of items extracted from the text.
+If the user asks for edge cases, include them.
+Otherwise provide standard results.

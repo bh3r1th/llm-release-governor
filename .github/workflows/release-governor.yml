@@ -1,0 +1,76 @@
+name: Release Governor
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  TARGET_ENV: staging
+  GITHUB_SHA: ${{ github.sha }}
+  PROMPT_PATH: prompts/current.txt
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Run PFA
+        id: pfa
+        run: |
+          pfa analyze \
+            --prompt ${{ env.PROMPT_PATH }} \
+            --output json \
+            --out-file pfa_findings.json
+        continue-on-error: true
+        env:
+          PROMPT_PATH: prompts/current.txt
+
+      - name: Upload PFA findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pfa-findings
+          path: pfa_findings.json
+
+      - name: Run locc
+        run: |
+          locc run \
+            --contract contracts/current.json \
+            --snapshot snapshots/current.json \
+            --output json > locc_result.json
+        continue-on-error: true
+
+      - name: Run Release Governor
+        id: governor
+        run: |
+          release-governor evaluate \
+            --locc-artifact locc_result.json \
+            --env ${{ env.TARGET_ENV }} \
+            --sha ${{ env.GITHUB_SHA }} \
+            --comment \
+            --repo ${{ github.repository }} \
+            --pr-number ${{ github.event.pull_request.number }} \
+            $([ -f pfa_findings.json ] && echo "--pfa-findings pfa_findings.json") \
+            $([ -f overrides/${{ env.TARGET_ENV }}/active.json ] \
+              && echo "--override-file overrides/${{ env.TARGET_ENV }}/active.json")
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload governor decision
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governor-decision
+          path: governor_decision.json

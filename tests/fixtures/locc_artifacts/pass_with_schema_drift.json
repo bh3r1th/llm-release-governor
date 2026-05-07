@@ -1,0 +1,21 @@
+{
+  "version": "1.1.0",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "schema_drift_check",
+      "result": "PASS",
+      "reasons": [],
+      "diffs": [
+        {
+          "field": "user_id",
+          "change_type": "type_changed"
+        },
+        {
+          "field": "role",
+          "change_type": "enum_drift"
+        }
+      ]
+    }
+  ]
+}

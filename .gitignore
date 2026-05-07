@@ -1,0 +1,40 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging/build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+
+# Test/cache tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Local temp/work dirs
+.pip_tmp/
+manual_test_tmp/
+tests/tmp_pytest/
+tmp*/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Local generated artifacts
+governor_decision.json
+pfa_findings.json
+rg_audit.jsonl
+
+# Local assistant config
+.claude/

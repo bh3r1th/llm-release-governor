@@ -1,0 +1,5 @@
+Return a JSON object with keys: status, items, notes.
+Use strict JSON format and include schema-compliant values only.
+If data is missing, return null values explicitly.
+Do not include PII fields.
+Keep output concise and deterministic.

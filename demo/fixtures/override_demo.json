@@ -1,0 +1,12 @@
+{
+  "_comment": "identity_hash was derived using release_governor.engine.loader.compute_identity_hash on demo/fixtures/locc_bad.json",
+  "approved_by": "demo-engineer",
+  "reason": "demo walkthrough — not for production use",
+  "scope": "staging",
+  "expires_at": "2027-05-07T00:00:00Z",
+  "approved_head_sha": "deadbeef",
+  "leakage_types": ["pii", "policy", "schema"],
+  "identity_hash": "ad05904a5ff7ff4ff91a5aa7aaff2bf2a69702ea7bc2c86f6d04046bb5d53a7b"
+}
+
+

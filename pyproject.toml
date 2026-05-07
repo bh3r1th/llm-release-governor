@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "release-governor"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "click",
+    "requests",
+    "pydantic>=2.0",
+    "PyYAML",
+]
+
+[project.scripts]
+release-governor = "release_governor.cli:cli"
+pfa = "prompt_failure_analyzer.cli:cli"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["release_governor*", "prompt_failure_analyzer*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = ["tmp_pytest", "tmp_*", ".git", "__pycache__"]

@@ -1,0 +1,4 @@
+{
+  "system": "Summarize customer profile details from the user input.",
+  "user": "From the user, return email and phone. Use user input directly."
+}

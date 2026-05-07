@@ -1,0 +1,17 @@
+{
+  "version": "1.1.0",
+  "status": "FAIL",
+  "checks": [
+    {
+      "name": "constraint_check",
+      "result": "FAIL",
+      "reasons": ["hard constraint violated"],
+      "diffs": [
+        {
+          "field": "required_field",
+          "change_type": "missing"
+        }
+      ]
+    }
+  ]
+}
